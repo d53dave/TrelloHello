@@ -1,5 +1,5 @@
 #
-# Be sure to run `pod lib lint HelloTrello.podspec' to ensure this is a
+# Be sure to run `pod lib lint TrelloHello.podspec' to ensure this is a
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
@@ -7,8 +7,8 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = "HelloTrello"
-  s.version          = "0.1.3"
+  s.name             = "TrelloHello"
+  s.version          = "0.0.1"
   s.summary          = "A Swift library to interact with the Trello API"
 
 # This description is used to generate tags and improve search results.
@@ -17,15 +17,15 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!  
   s.description      = <<-DESC
-    HelloTrello is a simple Swift API to interact with the Trello API. It uses auth-tokens and currenly only supports basic GET requests.
+    TrelloHello is a simple Swift API to interact with Trello. It uses auth-tokens and currenly only supports basic GET requests.
                        DESC
 
-  s.homepage         = "https://github.com/livio/HelloTrello"
+  s.homepage         = "https://github.com/d53dave/TrelloHello"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'BSD 3-Clause'
-  s.author           = { "Joel Fischer" => "joeljfischer@gmail.com" }
-  s.source           = { :git => "https://github.com/livio/HelloTrello.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.author           = { "Dave Sere" => "dave@d53dev.net" }
+  s.source           = { :git => "https://github.com/d53dave/TrelloHello.git", :tag => s.version.to_s }
+  s.social_media_url = 'https://twitter.com/d53r'
 
   s.ios.deployment_target = '9.0'
   s.tvos.deployment_target = '9.0'
@@ -33,7 +33,7 @@ Pod::Spec.new do |s|
 
   s.source_files = 'Pod/Classes/**/*'
   s.resource_bundles = {
-    'HelloTrello' => ['Pod/Assets/*.png']
+    'TrelloHello' => ['Pod/Assets/*.png']
   }
 
   s.dependency 'Alamofire', '~> 3.0'
