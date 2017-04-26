@@ -6,9 +6,9 @@ pod 'Decodable',        '~> 0.4'
 pod 'AlamofireImage',   '~> 2.0'
 
 target 'HelloTrello_Example' do
-  pod 'HelloTrello', :path => '../'
+  pod 'TrelloHello', :path => '../'
 end
 
 target 'HelloTrello_Tests' do
-  pod 'HelloTrello', :path => '../'
+  pod 'TrelloHello', :path => '../'
 end
