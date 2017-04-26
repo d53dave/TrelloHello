@@ -1,29 +1,26 @@
-# HelloTrello
+# TrelloHello
 
-[![CI Status](http://img.shields.io/travis/livio/HelloTrello.svg?style=flat)](https://travis-ci.org/Joel Fischer/HelloTrello)
-[![Version](https://img.shields.io/cocoapods/v/HelloTrello.svg?style=flat)](http://cocoapods.org/pods/HelloTrello)
-[![License](https://img.shields.io/cocoapods/l/HelloTrello.svg?style=flat)](http://cocoapods.org/pods/HelloTrello)
-[![Platform](https://img.shields.io/cocoapods/p/HelloTrello.svg?style=flat)](http://cocoapods.org/pods/HelloTrello)
+[![Version](https://img.shields.io/cocoapods/v/TrelloHello.svg?style=flat)](http://cocoapods.org/pods/TrelloHello)
+[![License](https://img.shields.io/cocoapods/l/TrelloHello.svg?style=flat)](http://cocoapods.org/pods/TrelloHello)
+[![Platform](https://img.shields.io/cocoapods/p/TrelloHello.svg?style=flat)](http://cocoapods.org/pods/TrelloHello)
 
-## Usage
+Trello API for Swift. This project is a fork of HelloTrello.
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+## Support
 
-## Requirements
+## Todo
+
+- Add Carthage support
 
 ## Installation
 
-HelloTrello is available through [CocoaPods](http://cocoapods.org). To install
+TrelloHello is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "HelloTrello"
+pod "TrelloHello"
 ```
-
-## Author
-
-Joel Fischer, joeljfischer@gmail.com
 
 ## License
 
-HelloTrello is available under the BSD 3-Clause license. See the LICENSE file for more info.
+TrelloHello is available under the BSD 3-Clause license. See the LICENSE file for more info.
