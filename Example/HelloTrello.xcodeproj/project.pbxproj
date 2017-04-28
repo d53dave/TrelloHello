@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		34E6CAA908687DBF0695F888 /* Pods_HelloTrello_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8111DB652524AD2BA8FD7641 /* Pods_HelloTrello_Tests.framework */; };
 		3571CD0183AF1D5D041EDA97 /* Pods_HelloTrello_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89377BFC5716E9C15CB4A4FC /* Pods_HelloTrello_Example.framework */; };
-		5D0B1AE91CBD8DA000D57CFE /* LivioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0B1ADA1CBD8C0B00D57CFE /* LivioTests.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -33,7 +32,6 @@
 		28CE862FB720C7051BCBB596 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		2EC8F0FCCDFADB4F6D986096 /* HelloTrello.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = HelloTrello.podspec; path = ../HelloTrello.podspec; sourceTree = "<group>"; };
 		3D47BE05F48AEE4B60C41136 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5D0B1ADA1CBD8C0B00D57CFE /* LivioTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivioTests.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* HelloTrello_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloTrello_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -129,7 +127,6 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				5D0B1ADA1CBD8C0B00D57CFE /* LivioTests.swift */,
 				607FACEB1AFB9204008FA782 /* Tests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
 			);
@@ -376,7 +373,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
-				5D0B1AE91CBD8DA000D57CFE /* LivioTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
