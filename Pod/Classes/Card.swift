@@ -15,7 +15,7 @@ public struct Card {
     public let description: String?
     public let closed: Bool?
     public let position: Int?
-    public let dueDate: NSDate?
+    public let dueDate: Date?
     public let listId: String?
     public let memberIds: [String]?
     public let boardId: String?
@@ -24,22 +24,22 @@ public struct Card {
 }
 
 extension Card: Decodable {
-    private static var isoDateFormatter = Card.isoDateFormatterInit()
+    fileprivate static var isoDateFormatter = Card.isoDateFormatterInit()
     
-    private static func isoDateFormatterInit() -> DateFormatter {
+    fileprivate static func isoDateFormatterInit() -> DateFormatter {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
-        dateFormatter.timeZone = NSTimeZone.local
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX") as Locale!
+        dateFormatter.timeZone = TimeZone.current
         
         return dateFormatter
     }
     
     public static func decode(_ json: Any) throws -> Card {
-        let dueDate: NSDate?
+        let dueDate: Date?
         
         if let jsonDate = try json =>? "due" as! String? {
-            dueDate = Card.isoDateFormatter.date(from: jsonDate) as NSDate?
+            dueDate = Card.isoDateFormatter.date(from: jsonDate)!
         } else {
             dueDate = nil
         }

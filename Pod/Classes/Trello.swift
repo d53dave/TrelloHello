@@ -11,12 +11,12 @@ import Alamofire
 import AlamofireImage
 
 public enum Result<T> {
-    case Failure(Error)
-    case Success(T)
+    case failure(Error)
+    case success(T)
     
     public var value: T? {
         switch self {
-        case .Success(let value):
+        case .success(let value):
             return value
         case .Failure:
             return nil
@@ -25,7 +25,7 @@ public enum Result<T> {
     
     public var error: Error? {
         switch self {
-        case .Success:
+        case .success:
             return nil
         case .Failure(let error):
             return error
@@ -34,8 +34,8 @@ public enum Result<T> {
 }
 
 public enum TrelloError: Error {
-    case NetworkError(error: NSError?)
-    case JSONError(error: Error?)
+    case networkError(error: NSError?)
+    case jsonError(error: Error?)
 }
 
 public enum ListType: String {
@@ -61,7 +61,7 @@ public enum MemberType: String {
     case Owners = "owners"
 }
 
-public class Trello {
+open class Trello {
     
     let authParameters: [String: AnyObject]
     
@@ -82,7 +82,7 @@ public class Trello {
 
 extension Trello {
     // MARK: Boards
-    public func getAllBoards(completion: @escaping (Result<[Board]>) -> Void) {
+    public func getAllBoards(_ completion: @escaping (Result<[Board]>) -> Void) {
         Alamofire.request(Router.AllBoards, method: .get, parameters: self.authParameters, encoding: JSONEncoding.default).responseJSON { (response) in
             guard let json = response.result.value else {
                 completion(.Failure(TrelloError.NetworkError(error: response.result.error as NSError?)))
@@ -98,11 +98,11 @@ extension Trello {
         }
     }
     
-    public func getBoard(id: String, includingLists listType: ListType = .None, includingCards cardType: CardType = .None, includingMembers memberType: MemberType = .None, completion: @escaping (Result<Board>) -> Void) {
+    public func getBoard(_ id: String, includingLists listType: ListType = .None, includingCards cardType: CardType = .None, includingMembers memberType: MemberType = .None, completion: @escaping (Result<Board>) -> Void) {
         let parameters = self.authParameters
-            .with(other: ["cards": cardType.rawValue as AnyObject])
-            .with(other: ["lists": listType.rawValue as AnyObject])
-            .with(other: ["members": memberType.rawValue as AnyObject])
+            .with(["cards": cardType.rawValue as AnyObject])
+            .with(["lists": listType.rawValue as AnyObject])
+            .with(["members": memberType.rawValue as AnyObject])
         
         Alamofire.request(Router.Board(boardId: id), parameters: parameters).responseJSON { (response) in
             guard let json = response.result.value else {
@@ -122,8 +122,8 @@ extension Trello {
 
 // MARK: Lists
 extension Trello {
-    public func getListsForBoard(id: String, filter: ListType = .Open, completion: @escaping (Result<[CardList]>) -> Void) {
-        let parameters = self.authParameters.with(other: ["filter": filter.rawValue as AnyObject])
+    public func getListsForBoard(_ id: String, filter: ListType = .Open, completion: @escaping (Result<[CardList]>) -> Void) {
+        let parameters = self.authParameters.with(["filter": filter.rawValue as AnyObject])
         
         Alamofire.request(Router.Lists(boardId: id), parameters: parameters).responseJSON { (response) in
             guard let json = response.result.value else {
@@ -140,7 +140,7 @@ extension Trello {
         }
     }
     
-    public func getListsForBoard(board: Board, filter: ListType = .Open, completion: @escaping (Result<[CardList]>) -> Void) {
+    public func getListsForBoard(_ board: Board, filter: ListType = .Open, completion: @escaping (Result<[CardList]>) -> Void) {
         getListsForBoard(id: board.id, filter: filter, completion: completion)
     }
 }
@@ -148,8 +148,8 @@ extension Trello {
 
 // MARK: Cards
 extension Trello {
-    public func getCardsForList(id: String, withMembers: Bool = false, completion: @escaping (Result<[Card]>) -> Void) {
-        let parameters = self.authParameters.with(other: ["members": withMembers as AnyObject])
+    public func getCardsForList(_ id: String, withMembers: Bool = false, completion: @escaping (Result<[Card]>) -> Void) {
+        let parameters = self.authParameters.with(["members": withMembers as AnyObject])
         
         Alamofire.request(Router.CardsForList(listId: id), parameters: parameters).responseJSON { (response) in
             guard let json = response.result.value else {
@@ -170,7 +170,7 @@ extension Trello {
 
 // Member API
 extension Trello {
-    public func getMember(id: String, completion: @escaping (Result<Member>) -> Void) {
+    public func getMember(_ id: String, completion: @escaping (Result<Member>) -> Void) {
         let parameters = self.authParameters
         
         Alamofire.request(Router.Member(id: id), parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response) in
@@ -188,7 +188,7 @@ extension Trello {
         }
     }
     
-    public func getMembersForCard(cardId: String, completion: @escaping (Result<[Member]>) -> Void) {
+    public func getMembersForCard(_ cardId: String, completion: @escaping (Result<[Member]>) -> Void) {
         let parameters = self.authParameters
         
         Alamofire.request(Router.Member(id: cardId), parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response) in
@@ -206,7 +206,7 @@ extension Trello {
         }
     }
     
-    public func getAvatarImage(avatarHash: String, size: AvatarSize, completion: @escaping (Result<Image>) -> Void) {
+    public func getAvatarImage(_ avatarHash: String, size: AvatarSize, completion: @escaping (Result<Image>) -> Void) {
         Alamofire.request("https://trello-avatars.s3.amazonaws.com/\(avatarHash)/\(size.rawValue).png").responseImage { response in
             guard let image = response.result.value else {
                 completion(.Failure(TrelloError.NetworkError(error: response.result.error as NSError?)))
@@ -218,8 +218,8 @@ extension Trello {
     }
     
     public enum AvatarSize: Int {
-        case Small = 30
-        case Large = 170
+        case small = 30
+        case large = 170
     }
 }
 
@@ -228,29 +228,29 @@ private enum Router: URLConvertible {
 
     static let baseURLString = "https://api.trello.com/1/"
     
-    case Search
-    case AllBoards
-    case Board(boardId: String)
-    case Lists(boardId: String)
-    case CardsForList(listId: String)
-    case Member(id: String)
-    case MembersForCard(cardId: String)
+    case search
+    case allBoards
+    case board(boardId: String)
+    case lists(boardId: String)
+    case cardsForList(listId: String)
+    case member(id: String)
+    case membersForCard(cardId: String)
     
     func asURL() throws -> URL {
         switch self {
-        case .Search:
+        case .search:
             return URL(string: Router.baseURLString + "search/")!
-        case .AllBoards:
+        case .allBoards:
             return URL(string: Router.baseURLString + "members/me/boards/")!
-        case .Board(let boardId):
+        case .board(let boardId):
             return URL(string: Router.baseURLString + "boards/\(boardId)/")!
-        case .Lists(let boardId):
+        case .lists(let boardId):
             return URL(string: Router.baseURLString + "boards/\(boardId)/lists/")!
-        case .CardsForList(let listId):
+        case .cardsForList(let listId):
             return URL(string: Router.baseURLString + "lists/\(listId)/cards/")!
-        case .Member(let memberId):
+        case .member(let memberId):
             return URL(string: Router.baseURLString + "members/\(memberId)/")!
-        case .MembersForCard(let cardId):
+        case .membersForCard(let cardId):
             return URL(string: Router.baseURLString + "cards/\(cardId)/members/")!
         }
 
@@ -258,7 +258,7 @@ private enum Router: URLConvertible {
 }
 
 extension Dictionary {
-    func with (other: [Key: Value]) -> [Key: Value] {
+    func with (_ other: [Key: Value]) -> [Key: Value] {
         var mergedDict: [Key: Value] = [:]
         [self, other].forEach { dict in
             for (key, value) in dict {
