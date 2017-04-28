@@ -32,9 +32,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
-  s.resource_bundles = {
-    'TrelloHello' => ['Pod/Assets/*.png']
-  }
 
   s.dependency 'Alamofire', '~> 4.4'
   s.dependency 'AlamofireImage', '~> 3.1'
