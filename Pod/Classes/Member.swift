@@ -21,7 +21,7 @@ public struct Member {
 }
 
 extension Member: Decodable {
-    public static func decode(json: AnyObject) throws -> Member {
+    public static func decode(_ json: Any) throws -> Member {
         return try Member(id: json => "id",
                           avatarHash: json =>? "avatarHash",
                           bio: json =>? "bio",
@@ -30,5 +30,6 @@ extension Member: Decodable {
                           initials: json =>? "initials",
                           username: json =>? "username",
                           email: json =>? "email")
+
     }
 }

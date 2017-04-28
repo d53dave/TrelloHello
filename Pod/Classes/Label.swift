@@ -18,7 +18,7 @@ public struct Label {
 }
 
 extension Label: Decodable {
-    public static func decode(json: AnyObject) throws -> Label {
+    public static func decode(_ json: Any) throws -> Label {
         return try Label(id: json => "id",
                          name: json =>? "name",
                          color: json => "color",

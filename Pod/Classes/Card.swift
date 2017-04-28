@@ -26,20 +26,20 @@ public struct Card {
 extension Card: Decodable {
     private static var isoDateFormatter = Card.isoDateFormatterInit()
     
-    private static func isoDateFormatterInit() -> NSDateFormatter {
-        let dateFormatter = NSDateFormatter()
+    private static func isoDateFormatterInit() -> DateFormatter {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-        dateFormatter.timeZone = NSTimeZone.localTimeZone()
+        dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale!
+        dateFormatter.timeZone = NSTimeZone.local
         
         return dateFormatter
     }
     
-    public static func decode(json: AnyObject) throws -> Card {
+    public static func decode(_ json: Any) throws -> Card {
         let dueDate: NSDate?
         
         if let jsonDate = try json =>? "due" as! String? {
-            dueDate = Card.isoDateFormatter.dateFromString(jsonDate)
+            dueDate = Card.isoDateFormatter.date(from: jsonDate) as NSDate?
         } else {
             dueDate = nil
         }

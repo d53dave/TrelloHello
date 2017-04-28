@@ -22,7 +22,7 @@ public struct Board {
 }
 
 extension Board: Decodable {
-    public static func decode(json: AnyObject) throws -> Board {
+    public static func decode(_ json: Any) throws -> Board {
         return try Board(id: json => "id",
                          name: json => "name",
                          description: json =>? "desc",
